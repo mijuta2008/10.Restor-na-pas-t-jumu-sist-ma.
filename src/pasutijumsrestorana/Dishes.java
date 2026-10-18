@@ -67,4 +67,8 @@ public class Dishes {
     public void setCategory(String category) {
         this.category = category;
     }
+
+    public void setID(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

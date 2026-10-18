@@ -46,7 +46,7 @@ public class Admin extends User {
   public List<Dishes> findDish(String nosaukums) throws SQLException {
         List<Dishes> dishesList = new ArrayList<>();
         String sql = "SELECT DISH_ID, NAME, DESCRIPTION, PRICE, CATEGORY "
-                   + "FROM APP.DISHES "
+                   + "FROM  APP.DISHES "
                    + "WHERE LOWER(NAME) LIKE ? "
                    + "ORDER BY DISH_ID";
 

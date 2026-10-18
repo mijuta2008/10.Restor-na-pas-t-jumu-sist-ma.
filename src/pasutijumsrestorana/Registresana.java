@@ -4,12 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
-import pasutijumsrestorana.Admin;
+import pasutijumsrestorana.DishesDao;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -23,9 +25,10 @@ import pasutijumsrestorana.Admin;
 
 
 public class Registresana extends javax.swing.JFrame {
-static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;create=true";
- static final String DB_USER = "dbuser";
- static final String DB_PASSWD = "dbuser";
+static final String DB_URL = "jdbc:derby:database/appdb;create=true";
+ static final String DB_USER = "app";
+ static final String DB_PASSWD = "app";
+    private final DefaultTableModel model;
     
     /**
      * Creates new form Registresana
@@ -33,10 +36,12 @@ static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;cr
  
     public Registresana() {
         initComponents(); 
-        this.setLocationRelativeTo(null); 
-        
-    ieladetEdienus();
-  
+
+    this.setLocationRelativeTo(null);
+ 
+    model = (DefaultTableModel) edienkarteTable.getModel();
+ 
+    loadData();
 }
     
     private User loggedInUser = null;
@@ -135,6 +140,8 @@ static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;cr
         jaunaCenaText = new javax.swing.JTextField();
         redigetBut = new javax.swing.JButton();
         atpBut3 = new javax.swing.JButton();
+        jaunaedNosaukumsLab1 = new javax.swing.JLabel();
+        vecId = new javax.swing.JTextField();
         summaLab1 = new javax.swing.JLabel();
         laipniLudzamLab = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -1100,6 +1107,16 @@ static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;cr
             }
         });
 
+        jaunaedNosaukumsLab1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jaunaedNosaukumsLab1.setForeground(new java.awt.Color(255, 153, 153));
+        jaunaedNosaukumsLab1.setText(" Ēdiena id:");
+
+        vecId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vecIdActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
@@ -1119,22 +1136,29 @@ static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;cr
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jaunaedNosaukumsLab)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jaunaedNosaukumsText, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel12Layout.createSequentialGroup()
                                 .addGap(92, 92, 92)
                                 .addComponent(redigetBut)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(atpBut3)))
+                                .addComponent(atpBut3))
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jaunaedNosaukumsLab1)
+                                    .addComponent(jaunaedNosaukumsLab))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jaunaedNosaukumsText, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vecId, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jaunaedNosaukumsLab1)
+                    .addComponent(vecId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jaunaedNosaukumsLab)
                     .addComponent(jaunaedNosaukumsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1160,7 +1184,7 @@ static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;cr
             .addGroup(Ēdienu_rediģēšanaLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Ēdienu_rediģēšanaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(edRedigesanaLab)
@@ -1173,7 +1197,7 @@ static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;cr
                 .addComponent(edRedigesanaLab)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         summaLab1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -1549,15 +1573,7 @@ if (success) {
 } else {
     JOptionPane.showMessageDialog(this, "Kļūda, pievienojot ēdienu.");
 }
-        
-        
-        JOptionPane.showMessageDialog(
-        this,
-        "Ēdiens veiksmīgi pievienots!",
-        "Informācija",
-        JOptionPane.INFORMATION_MESSAGE
-);
-
+   
     }//GEN-LAST:event_mekletBut1ActionPerformed
 
     private void atpBut2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atpBut2ActionPerformed
@@ -1590,38 +1606,39 @@ Galvenais_logs.setVisible(true);
     private void redigetButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigetButActionPerformed
         // TODO add your handling code here:
         
-  try {
+ 
+try {
+    int currentDishId = Integer.parseInt(vecId.getText());
+    
     String newName = jaunaedNosaukumsText.getText();        
     String newDescription = jaunsAprakstsText.getText();   
-    double newPrice = Double.parseDouble(jaunaCenaText.getText()); 
-    
+    double newPrice = Double.parseDouble(jaunaCenaText.getText());  
 
     String category = "Galvenais"; 
 
     Admin admin = new Admin("AdminName", "admin@rest.lv", "password");
-      int currentDishId = 0;
-    
     boolean success = admin.editDish(currentDishId, newName, newPrice, newDescription, category);
 
     if (success) {
         javax.swing.JOptionPane.showMessageDialog(this, "Ēdiens veiksmīgi atjaunināts!");
-        this.dispose(); 
+        this.dispose();
     } else {
-        javax.swing.JOptionPane.showMessageDialog(this, "Kļūda, rediģējot ēdienu.");
+        javax.swing.JOptionPane.showMessageDialog(this, "Kļūda, rediģējot ēdienu. Pārbaudiet ID!");
     }
 
 } catch (NumberFormatException e) {
-    javax.swing.JOptionPane.showMessageDialog(this, "Lūdzu, ievadiet derīgu skaitlisku cenu!");
+    javax.swing.JOptionPane.showMessageDialog(this, "Lūdzu, ievadiet derīgu skaitlisku ID un cenu!");
 }
     }//GEN-LAST:event_redigetButActionPerformed
 
     private void atpBut3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atpBut3ActionPerformed
         // TODO add your handling code here:
         
-                
+         vecId.setText("");       
 jaunaedNosaukumsText.setText("");
 jaunsAprakstsText.setText("");
 jaunaCenaText.setText("");
+
         
         
                 Galvenais_logs.setSize(300,550);
@@ -1641,36 +1658,6 @@ Galvenais_logs.setVisible(true);
 
     private void maksatButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maksatButActionPerformed
         // TODO add your handling code here:
-try {
-        String idText = idedienamText.getText().trim();
-        if (idText.isEmpty()) {
-            javax.swing.JOptionPane.showMessageDialog(this, 
-                "Lūdzu, ievadiet ēdiena ID!", 
-                "Kļūda", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        int dishId = Integer.parseInt(idText);
-        int currentOrderId = 1;
-        int quantity = 1;      
-        double price = 0.0;    
-        
-        OrderDao orderDao = new OrderDao();
-        
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Ēdiens veiksmīgi pievienots grozam!", 
-            "Informācija", 
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
-        idedienamText.setText("");
-        
-    } catch (NumberFormatException e) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Ievadiet derīgu skaitlisku ID!", 
-            "Kļūda", 
-            javax.swing.JOptionPane.ERROR_MESSAGE);
-    }
 
 
         
@@ -1729,7 +1716,7 @@ Reģistrēšana.setVisible(true);
 
     try {
         UserDao dao = new UserDao();
-        boolean success = dao.registerUser(vards + " " + uzvards, pasts, parole, "klients");
+        boolean success = dao.addUser(vards + " " + uzvards, pasts, parole, "klients");
         
         if (success) {
             Galvenais_logs.setSize(300, 550);
@@ -1859,6 +1846,10 @@ Reģistrēšana.setVisible(true);
         
     }//GEN-LAST:event_summaTextActionPerformed
 
+    private void vecIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vecIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vecIdActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1886,29 +1877,24 @@ Reģistrēšana.setVisible(true);
         }
         //</editor-fold>
 
-java.awt.EventQueue.invokeLater(new Runnable() {
-    public void run() {
 
-        new Registresana().setVisible(true);
+    try {
+        Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+        System.out.println("Driver found!");
 
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            System.out.println("Driver found!");
+        DatabaseManager.init();
 
-            Connection conn = DriverManager.getConnection(
-                    DB_URL,
-                    DB_USER,
-                    DB_PASSWD);
+        System.out.println("INIT DONE");
 
-            System.out.println("Database connected successfully!");
-
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Driver NOT found!");
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-});
+
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new Registresana().setVisible(true);
+        }
+    });
 }
     
 
@@ -1963,6 +1949,7 @@ java.awt.EventQueue.invokeLater(new Runnable() {
     private javax.swing.JLabel jaunaCenaLab;
     private javax.swing.JTextField jaunaCenaText;
     private javax.swing.JLabel jaunaedNosaukumsLab;
+    private javax.swing.JLabel jaunaedNosaukumsLab1;
     private javax.swing.JTextField jaunaedNosaukumsText;
     private javax.swing.JLabel jaunsAprakstsLab;
     private javax.swing.JTextField jaunsAprakstsText;
@@ -1996,55 +1983,21 @@ java.awt.EventQueue.invokeLater(new Runnable() {
     private javax.swing.JTextField uzvardsText3;
     private javax.swing.JLabel vardsLab3;
     private javax.swing.JTextField vardsText3;
+    private javax.swing.JTextField vecId;
     private javax.swing.JDialog Ēdienkarte;
     private javax.swing.JDialog Ēdienu_meklēšana;
     private javax.swing.JDialog Ēdienu_pievienošana;
     private javax.swing.JDialog Ēdienu_rediģēšana;
     // End of variables declaration//GEN-END:variables
 
-private void ieladetEdienus() {
-
-    javax.swing.table.DefaultTableModel model =
-        (javax.swing.table.DefaultTableModel) pasutijumaGrozs.getModel();
-
-    model.setColumnIdentifiers(new Object[] {"ID", "Nosaukums", "Cena", "Apraksts"});
-
+    private void loadData() {
     model.setRowCount(0);
 
-    String sql = "SELECT DISH_ID, NAME, PRICE, DESCRIPTION FROM APP.DISHES";
+    DishesDao dishesDao = new DishesDao();
 
-    try (
-        java.sql.Connection con =
-            java.sql.DriverManager.getConnection(
-                "jdbc:derby://localhost:1527/Restoranapasutijuma;create=true",
-                "app",
-                "app"
-            );
-        java.sql.PreparedStatement ps = con.prepareStatement(sql);
-        java.sql.ResultSet rs = ps.executeQuery()
-    ) {
-        int count = 0;
-        while (rs.next()) {
-            count++;
-            model.addRow(new Object[] {
-                rs.getInt("DISH_ID"),
-                rs.getString("NAME"),
-                rs.getDouble("PRICE"),
-                rs.getString("DESCRIPTION")
-            });
-        }
-
-    } catch (java.sql.SQLException e) {
-        javax.swing.JOptionPane.showMessageDialog(
-            this,
-            "Neizdevās ielādēt ēdienus: " + e.getMessage(),
-            "Database error",
-            javax.swing.JOptionPane.ERROR_MESSAGE
-        );
-        e.printStackTrace();
+    for (Dishes dish : dishesDao.getAllDishes()) {
+        model.addRow(new Object[]{dish.getId(), dish.getName(),dish.getDescription(),dish.getPrice()
+        });
     }
-
-    model.fireTableDataChanged();
-    pasutijumaGrozs.revalidate();
-    pasutijumaGrozs.repaint();
-}}
+}    }
+ 

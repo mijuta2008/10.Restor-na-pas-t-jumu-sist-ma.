@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class UserDao{
     
-    private static final String DB_URL = "jdbc:derby://localhost:1527/Restoranapasutijuma;create=true";
+    private static final String DB_URL = "jdbc:derby:database/appdb;create=true";
     private static final String DB_USER = "dbuser";
     private static final String DB_PASSWD = "dbuser";
 
@@ -28,7 +28,7 @@ public class UserDao{
     // @return true, ja reģistrācija veiksmīga
     // @throws SQLException ja rodas kļūda ar datu bāzi
      
-    public boolean registerUser(String name, String login, String password, String role) throws SQLException {
+    public boolean addUser(String name, String login, String password, String role) throws SQLException {
         String sql = "INSERT INTO APP.users (name, login, password, role) VALUES (?, ?, ?, ?)";
         
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWD);
