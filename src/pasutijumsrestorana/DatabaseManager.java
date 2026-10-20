@@ -231,7 +231,7 @@ try {
     Statement st = con.createStatement();
     ResultSet rs = st.executeQuery("SELECT * FROM APP.DISHES")
 ) {
-
+ System.out.println("table dishes!");
     while (rs.next()) {
         System.out.println(
             rs.getInt("DISH_ID") + " | " +
@@ -246,7 +246,7 @@ try {
     e.printStackTrace();
 }
 
-    
+     System.out.println("table users!");
 
            try (
     Connection con = DatabaseManager.getConnection();
@@ -268,7 +268,7 @@ try {
     e.printStackTrace();
 }
 
-    
+     System.out.println("table reservations!");
       try (
     Connection con = DatabaseManager.getConnection();
     Statement st = con.createStatement();
@@ -281,11 +281,53 @@ try {
             rs.getString("reservation_date") + " | " +
             rs.getString("reservation_time") + " | " +
             rs.getString("status") + " | " +
-            rs.getString("user_id")
+            rs.getInt("user_id")
+        );
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+         System.out.println("table orders!");
+      try (
+    Connection con = DatabaseManager.getConnection();
+    Statement st = con.createStatement();
+    ResultSet rs = st.executeQuery("SELECT * FROM APP.Orders")
+) {
+
+    while (rs.next()) {
+        System.out.println(
+            rs.getInt("order_id") + " | " +
+            rs.getString("order_date") + " | " +
+            rs.getString("status") + " | " +
+            rs.getDouble("total_price") + " | " +
+              rs.getString("payment_status") + " | " +
+            rs.getInt("user_id") + " | " 
+           
+        );
+    }
+
+} catch (SQLException e) {
+    e.printStackTrace();
+}
+       System.out.println("table order_dishes!");
+        try (
+    Connection con = DatabaseManager.getConnection();
+    Statement st = con.createStatement();
+    ResultSet rs = st.executeQuery("SELECT * FROM APP.ORDER_DISHES")
+) {
+
+    while (rs.next()) {
+        System.out.println(
+            rs.getInt("order_id") + " | " +
+            rs.getInt("dish_id") + " | " +
+            rs.getInt("quantity") + " | " +
+              rs.getDouble("price") + " | "
+           
         );
     }
 
 } catch (SQLException e) {
     e.printStackTrace();
 }}}
-
+    

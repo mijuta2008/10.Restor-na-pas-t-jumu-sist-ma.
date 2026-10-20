@@ -1302,8 +1302,9 @@ static final String DB_URL = "jdbc:derby:database/appdb;create=true";
 
     private void ielogButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ielogButActionPerformed
         // TODO add your handling code here:
-        Ielogošana.setSize(350, 300);
-Ielogošana.setLocationRelativeTo(null); 
+        Ielogošana.pack();
+Ielogošana.setLocationRelativeTo(null);
+        Ielogošana.setResizable(false);
 Ielogošana.setVisible(true);
         this.setVisible(false);
         
@@ -1340,8 +1341,9 @@ Ielogošana.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Jūs veiksmīgi ielogojāties, " + loggedInUser.getName() + "!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
             }
+              Galvenais_logs.pack();
+            Galvenais_logs.setResizable(false);
 
-            Galvenais_logs.setSize(300, 500);
             Galvenais_logs.setLocationRelativeTo(null); 
             Galvenais_logs.setVisible(true);
             
@@ -1375,7 +1377,8 @@ Ielogošana.setVisible(true);
         // TODO add your handling code here:
         
 Ēdienkarte.setVisible(true);
-             Ēdienkarte.setSize(350, 550);
+    Ēdienkarte.pack();
+             Ēdienkarte.setResizable(false);
 Ēdienkarte.setLocationRelativeTo(null); 
         Galvenais_logs.setVisible(false);
         
@@ -1385,7 +1388,8 @@ Ielogošana.setVisible(true);
         // TODO add your handling code here:
         
 Ēdienu_meklēšana.setVisible(true);
-   Ēdienu_meklēšana.setSize(350, 250);
+Ēdienu_meklēšana.pack();
+   Ēdienu_meklēšana.setResizable(false);
 Ēdienu_meklēšana.setLocationRelativeTo(null); 
         Galvenais_logs.setVisible(false);
         

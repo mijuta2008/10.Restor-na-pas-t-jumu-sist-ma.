@@ -1,12 +1,12 @@
 ----------------------------------------------------------------
-Sun Oct 18 11:53:56 EEST 2026:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-01a1-4e37-b5d1-000007085718 
-on database directory C:\Users\milen\OneDrive\Рабочий стол\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\database\appdb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3a71f4dd 
-Loaded from file:/C:/Users/milen/OneDrive/%d0%a0%d0%b0%d0%b1%d0%be%d1%87%d0%b8%d0%b9%20%d1%81%d1%82%d0%be%d0%bb/RestoranaPasutijums/RestoranaPasutijums/RestoranaPasutijums/RestoranaPasutijums/lib/derby.jar
+Tue Oct 20 16:02:45 EEST 2026:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-01a1-5968-3a93-00000f540868 
+on database directory D:\Users\Milena.Kurtisa\Desktop\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\database\appdb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@3a71f4dd 
+Loaded from file:/D:/Users/Milena.Kurtisa/Desktop/RestoranaPasutijums/RestoranaPasutijums/RestoranaPasutijums/RestoranaPasutijums/RestoranaPasutijums/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=21.0.12.1+1-LTS-4
-user.dir=C:\Users\milen\OneDrive\Рабочий стол\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums
-os.name=Windows 11
+java.runtime.version=21.0.6+8-LTS-188
+user.dir=D:\Users\Milena.Kurtisa\Desktop\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums\RestoranaPasutijums
+os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
