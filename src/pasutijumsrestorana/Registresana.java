@@ -42,6 +42,7 @@ static final String DB_URL = "jdbc:derby:database/appdb;create=true";
     model = (DefaultTableModel) edienkarteTable.getModel();
  
     loadData();
+    
 }
     
     private User loggedInUser = null;
@@ -143,6 +144,10 @@ static final String DB_URL = "jdbc:derby:database/appdb;create=true";
         jaunaedNosaukumsLab1 = new javax.swing.JLabel();
         vecId = new javax.swing.JTextField();
         summaLab1 = new javax.swing.JLabel();
+        Meklēšāna = new javax.swing.JDialog();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        registrBut2 = new javax.swing.JButton();
         laipniLudzamLab = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         ielogBut = new javax.swing.JButton();
@@ -1204,6 +1209,58 @@ static final String DB_URL = "jdbc:derby:database/appdb;create=true";
         summaLab1.setForeground(new java.awt.Color(255, 153, 153));
         summaLab1.setText("€");
 
+        Meklēšāna.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                MeklēšānaWindowClosing(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Dish_id", "Nosaukums", "Skaits", "Cena"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
+        registrBut2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        registrBut2.setForeground(new java.awt.Color(255, 153, 153));
+        registrBut2.setText("Atpakaļ");
+        registrBut2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrBut2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout MeklēšānaLayout = new javax.swing.GroupLayout(Meklēšāna.getContentPane());
+        Meklēšāna.getContentPane().setLayout(MeklēšānaLayout);
+        MeklēšānaLayout.setHorizontalGroup(
+            MeklēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MeklēšānaLayout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addGroup(MeklēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MeklēšānaLayout.createSequentialGroup()
+                        .addComponent(registrBut2)
+                        .addGap(154, 154, 154))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MeklēšānaLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44))))
+        );
+        MeklēšānaLayout.setVerticalGroup(
+            MeklēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MeklēšānaLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(registrBut2)
+                .addGap(33, 33, 33))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -1322,6 +1379,7 @@ Ielogošana.setVisible(true);
 
     private void ielogBut2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ielogBut2ActionPerformed
         // TODO add your handling code here:
+        
     String loginInput = pastsText2.getText().trim();
     String passwordInput = paroleText2.getText().trim();
 
@@ -1359,6 +1417,7 @@ Ielogošana.setVisible(true);
     } catch (SQLException ex) {
         JOptionPane.showMessageDialog(this, "Kļūda pieslēdzoties datu bāzei: " + ex.getMessage(), "Kļūda", JOptionPane.ERROR_MESSAGE);
     }
+    
 
     }//GEN-LAST:event_ielogBut2ActionPerformed
 
@@ -1405,17 +1464,57 @@ Pasūtījuma_grozs.setLocationRelativeTo(null);
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-    
+
+    if (loggedInUser == null) {
+        JOptionPane.showMessageDialog(
+                this,
+                "Vispirms ielogojieties!"
+        );
+        return;
+    }
+
+    if (!"administrators".equalsIgnoreCase(loggedInUser.getRole())) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Šī funkcija pieejama tikai administratoram!"
+        );
+        return;
+   
+
+    }
+
         
         Ēdienu_rediģēšana.setVisible(true);
            Ēdienu_rediģēšana.setSize(400,300);
 Ēdienu_rediģēšana.setLocationRelativeTo(null); 
         Galvenais_logs.setVisible(false);
-        
+    
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         // TODO add your handling code here:
+        
+      
+         if (loggedInUser == null) {
+        JOptionPane.showMessageDialog(
+                this,
+                "Vispirms ielogojieties!"
+        );
+        return;
+    }
+
+    if (!"administrators".equalsIgnoreCase(loggedInUser.getRole())) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Šī funkcija pieejama tikai administratoram!"
+        );
+        return;
+   
+
+    }
+        
         Ēdienu_pievienošana.setVisible(true);
         
                  Ēdienu_pievienošana.setSize(400,300);
@@ -1504,38 +1603,66 @@ Galvenais_logs.setLocationRelativeTo(null);
 
     private void saglabatButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saglabatButActionPerformed
         // TODO add your handling code here:\
-  String nosaukums = ednosaukumsText.getText().trim();
+        
+             Meklēšāna.setSize(350,300);
+Meklēšāna.setLocationRelativeTo(null); 
+Meklēšāna.setVisible(true);
+     Ēdienu_meklēšana.setVisible(false); 
+     
+String nosaukums = ednosaukumsText.getText().trim();
 
-    if (nosaukums.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Ievadiet ēdiena nosaukumu!", "Kļūda", JOptionPane.ERROR_MESSAGE);
+if (nosaukums.isEmpty()) {
+
+    JOptionPane.showMessageDialog(
+            this,
+            "Ievadiet ēdiena nosaukumu!"
+    );
+
+    return;
+}
+
+try {
+
+    Admin admin =
+            new Admin("Admin", "admin", "admin");
+
+    List<Dishes> result =
+            admin.findDish(nosaukums);
+
+    DefaultTableModel model =
+            (DefaultTableModel) jTable1.getModel();
+
+    model.setRowCount(0);
+
+    for (Dishes ediens : result) {
+
+        model.addRow(new Object[]{
+            ediens.getId(),
+            ediens.getName(),
+            ediens.getDescription(),
+            ediens.getPrice(),
+            ediens.getCategory()
+        });
+    }
+
+    if (result.isEmpty()) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                "Ēdieni netika atrasti!"
+        );
+
         return;
     }
 
-    try {
-        DishesDao dishesDao = new DishesDao();
-        List<Dishes> rezultati = dishesDao.findDish(nosaukums);
 
-        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) edienkarteTable.getModel();
-        model.setRowCount(0); 
+} catch (SQLException ex) {
 
-        for (Dishes d : rezultati) {
-            model.addRow(new Object[]{
-                d.getId(),
-                d.getName(),
-                d.getDescription(),
-                d.getPrice()
-            });
-        }
-
-        if (model.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(this, "Ēdieni netika atrasti!", "Informācija", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
-  
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(this, "Datubāzes kļūda: " + ex.getMessage(), "Kļūda", JOptionPane.ERROR_MESSAGE);
-    }
+    JOptionPane.showMessageDialog(
+            this,
+            "Datubāzes kļūda: " + ex.getMessage()
+    );
+}
 
     }//GEN-LAST:event_saglabatButActionPerformed
 
@@ -1562,9 +1689,15 @@ Galvenais_logs.setVisible(true);
 
     private void mekletBut1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mekletBut1ActionPerformed
         // TODO add your handling code here:
-String name = edNosaukumsText.getText();
+  String name = edNosaukumsText.getText();
 double price = Double.parseDouble(cenaText.getText());
 String description = aprakstsText.getText();
+
+        if (name.isEmpty() || description.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Lūdzu, aizpildiet visus obligātos laukus!", "Brīdinājums", JOptionPane.WARNING_MESSAGE);
+        return; 
+    }
+
 
 
 Admin admin = new Admin("AdminName", "admin@rest.lv", "password");
@@ -1662,7 +1795,72 @@ Galvenais_logs.setVisible(true);
 
     private void maksatButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maksatButActionPerformed
         // TODO add your handling code here:
+ if (currentUserId == 0) {
+            JOptionPane.showMessageDialog(this,"Vispirms ielogojieties!");
+            return;
+        }
 
+        if (currentOrderId == 0) {
+            JOptionPane.showMessageDialog(this,"Grozs ir tukšs!");
+            return;
+        }
+
+        // norādiet rezervācijas datumu
+        String dateText = JOptionPane.showInputDialog(
+            this,
+            "Ievadiet rezervācijas datumu:"
+        );
+
+        if (dateText == null) return;
+
+        // norādiet rezervācijas laiku
+        String timeText = JOptionPane.showInputDialog(
+            this,
+            "Ievadiet rezervācijas laiku:"
+        );
+
+        if (timeText == null) return;
+
+        java.sql.Date reservationDate;
+        java.sql.Time reservationTime;
+
+        try {
+            // datums formātā 2026.10.11 vai 2026-10-11
+            String normalizedDate = dateText.trim().replace('.', '-');
+            reservationDate = java.sql.Date.valueOf(normalizedDate);
+
+            // laiks 17:00 vai 17:00:00
+            String normalizedTime = timeText.trim();
+
+            if (normalizedTime.matches("\\d{2}:\\d{2}")) {
+                normalizedTime += ":00";
+            }
+
+            reservationTime = java.sql.Time.valueOf(normalizedTime);
+
+            // nepieļaujam pagātnes datumus.
+            if (reservationDate.before(
+                    new java.sql.Date(System.currentTimeMillis()))) {
+
+                JOptionPane.showMessageDialog(
+                    this, "Rezervācijas datums nevar būt pagātnē!"
+                );
+                return;
+            }
+
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Nepareizs datums vai laiks!\n"
+                + "Datums: 2026.10.15\n"
+                + "Laiks: 17:00",
+                "Kļūda",
+                JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        
 
         
     }//GEN-LAST:event_maksatButActionPerformed
@@ -1854,6 +2052,22 @@ Reģistrēšana.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_vecIdActionPerformed
 
+    private void registrBut2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrBut2ActionPerformed
+        // TODO add your handling code here:
+        Ēdienu_meklēšana.setVisible(true);
+Ēdienu_meklēšana.pack();
+   Ēdienu_meklēšana.setResizable(false);
+Ēdienu_meklēšana.setLocationRelativeTo(null); 
+        Meklēšāna.setVisible(false);
+ 
+  
+     
+    }//GEN-LAST:event_registrBut2ActionPerformed
+
+    private void MeklēšānaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_MeklēšānaWindowClosing
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MeklēšānaWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -1905,6 +2119,7 @@ Reģistrēšana.setVisible(true);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDialog Galvenais_logs;
     private javax.swing.JDialog Ielogošana;
+    private javax.swing.JDialog Meklēšāna;
     private javax.swing.JDialog Pasūtījuma_grozs;
     private javax.swing.JDialog Reģistrēšana;
     private javax.swing.JLabel aprakstsLab;
@@ -1950,6 +2165,8 @@ Reģistrēšana.setVisible(true);
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jaunaCenaLab;
     private javax.swing.JTextField jaunaCenaText;
     private javax.swing.JLabel jaunaedNosaukumsLab;
@@ -1973,6 +2190,7 @@ Reģistrēšana.setVisible(true);
     private javax.swing.JLabel pasutijumaGrozsLab;
     private javax.swing.JButton redigetBut;
     private javax.swing.JButton registrBut;
+    private javax.swing.JButton registrBut2;
     private javax.swing.JButton registrBut3;
     private javax.swing.JLabel registrLab1;
     private javax.swing.JButton saglabatBut;

@@ -34,6 +34,7 @@ public class User {
     
     public boolean enter(String login, String password) {
         return this.login.equals(login) && this.password.equals(password);
+        
     }
 
     public String getName() { return name; }

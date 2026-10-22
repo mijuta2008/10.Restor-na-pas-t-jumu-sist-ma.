@@ -86,6 +86,4 @@ public List<Dishes> getAllDishes() {
     return list;
 }
 
-  public List<Dishes> findDish(String nosaukums) throws SQLException {
-        return null;
-  }}
+}
