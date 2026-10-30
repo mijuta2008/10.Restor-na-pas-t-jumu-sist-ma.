@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 /**
  *
- * @author Viktorija.Balalajeva
+ * @author Milena.Kurtisa
  */
 public class DatabaseManager {
     public static void main(String[] args) {
