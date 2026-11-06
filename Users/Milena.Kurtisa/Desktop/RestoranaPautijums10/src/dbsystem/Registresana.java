@@ -82,6 +82,7 @@ public Registresana() {
         jPanel5 = new javax.swing.JPanel();
         redigetEdienusBut = new javax.swing.JButton();
         pievienotEdienusBut = new javax.swing.JButton();
+        dzestEdienu = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
         Ēdienkarte = new javax.swing.JDialog();
         edienkarteLab = new javax.swing.JLabel();
@@ -104,8 +105,8 @@ public Registresana() {
         jPanel6 = new javax.swing.JPanel();
         ednosaukumsLab = new javax.swing.JLabel();
         ednosaukumsText = new javax.swing.JTextField();
-        mekletBut = new javax.swing.JButton();
         atpBut1 = new javax.swing.JButton();
+        mekletBut = new javax.swing.JButton();
         edienaNosaukumsLab = new javax.swing.JLabel();
         Ēdienu_rediģēšana = new javax.swing.JDialog();
         edRedigesanaLab = new javax.swing.JLabel();
@@ -133,6 +134,13 @@ public Registresana() {
         atpBut2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         aprakstArea = new javax.swing.JTextArea();
+        Edienu_dzēšāna = new javax.swing.JDialog();
+        atpBut5 = new javax.swing.JButton();
+        atpBut6 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        edienkarteTable1 = new javax.swing.JTable();
+        edienaNosaukumsLab1 = new javax.swing.JLabel();
+        dzestEdienus = new javax.swing.JButton();
         laipniLudzamLab = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         ielogBut = new javax.swing.JButton();
@@ -439,6 +447,15 @@ public Registresana() {
             }
         });
 
+        dzestEdienu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        dzestEdienu.setForeground(new java.awt.Color(255, 153, 153));
+        dzestEdienu.setText("Dzēst ēdienu");
+        dzestEdienu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dzestEdienuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -447,7 +464,8 @@ public Registresana() {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pievienotEdienusBut, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                    .addComponent(redigetEdienusBut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(redigetEdienusBut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dzestEdienu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -457,7 +475,9 @@ public Registresana() {
                 .addComponent(redigetEdienusBut)
                 .addGap(18, 18, 18)
                 .addComponent(pievienotEdienusBut)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dzestEdienu)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -696,6 +716,12 @@ public Registresana() {
         summaLab.setForeground(new java.awt.Color(255, 153, 153));
         summaLab.setText("Summa:");
 
+        summaText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                summaTextActionPerformed(evt);
+            }
+        });
+
         summaLab1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         summaLab1.setForeground(new java.awt.Color(255, 153, 153));
         summaLab1.setText("€");
@@ -754,15 +780,6 @@ public Registresana() {
         ednosaukumsLab.setForeground(new java.awt.Color(255, 153, 153));
         ednosaukumsLab.setText("Ēdiena nosaukums:");
 
-        mekletBut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        mekletBut.setForeground(new java.awt.Color(255, 153, 153));
-        mekletBut.setText("Meklēt");
-        mekletBut.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mekletButActionPerformed(evt);
-            }
-        });
-
         atpBut1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         atpBut1.setForeground(new java.awt.Color(255, 153, 153));
         atpBut1.setText("Atpakaļ");
@@ -772,21 +789,30 @@ public Registresana() {
             }
         });
 
+        mekletBut.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        mekletBut.setForeground(new java.awt.Color(255, 153, 153));
+        mekletBut.setText("Meklēt");
+        mekletBut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mekletButActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(ednosaukumsLab)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(ednosaukumsText, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGap(97, 97, 97)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel6Layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
                         .addComponent(mekletBut, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(atpBut1)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -799,8 +825,8 @@ public Registresana() {
                     .addComponent(ednosaukumsLab))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mekletBut)
-                    .addComponent(atpBut1))
+                    .addComponent(atpBut1)
+                    .addComponent(mekletBut))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -815,21 +841,21 @@ public Registresana() {
             .addGroup(Ēdienu_meklēšanaLayout.createSequentialGroup()
                 .addGroup(Ēdienu_meklēšanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Ēdienu_meklēšanaLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(Ēdienu_meklēšanaLayout.createSequentialGroup()
                         .addGap(128, 128, 128)
-                        .addComponent(edienaNosaukumsLab)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(edienaNosaukumsLab))
+                    .addGroup(Ēdienu_meklēšanaLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         Ēdienu_meklēšanaLayout.setVerticalGroup(
             Ēdienu_meklēšanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Ēdienu_meklēšanaLayout.createSequentialGroup()
                 .addContainerGap(12, Short.MAX_VALUE)
                 .addComponent(edienaNosaukumsLab)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13))
+                .addGap(19, 19, 19))
         );
 
         Ēdienu_rediģēšana.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -1057,8 +1083,7 @@ public Registresana() {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(saglabatBut)
-                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(atpBut2)))
+                    .addComponent(atpBut2))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -1084,6 +1109,120 @@ public Registresana() {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
+
+        Edienu_dzēšāna.addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                Edienu_dzēšānaWindowClosing(evt);
+            }
+        });
+
+        atpBut5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        atpBut5.setForeground(new java.awt.Color(255, 153, 153));
+        atpBut5.setText("Atpakaļ");
+        atpBut5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atpBut5ActionPerformed(evt);
+            }
+        });
+
+        atpBut6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        atpBut6.setForeground(new java.awt.Color(255, 153, 153));
+        atpBut6.setText("Dzēst");
+        atpBut6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atpBut6ActionPerformed(evt);
+            }
+        });
+
+        edienkarteTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "ID", "Nosaukums", "Apraksts", "Cena"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(edienkarteTable1);
+        if (edienkarteTable1.getColumnModel().getColumnCount() > 0) {
+            edienkarteTable1.getColumnModel().getColumn(0).setPreferredWidth(20);
+            edienkarteTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
+            edienkarteTable1.getColumnModel().getColumn(2).setPreferredWidth(500);
+            edienkarteTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
+        }
+
+        edienaNosaukumsLab1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        edienaNosaukumsLab1.setForeground(new java.awt.Color(255, 153, 153));
+        edienaNosaukumsLab1.setText("Ēdiena dzēšāna");
+
+        javax.swing.GroupLayout Edienu_dzēšānaLayout = new javax.swing.GroupLayout(Edienu_dzēšāna.getContentPane());
+        Edienu_dzēšāna.getContentPane().setLayout(Edienu_dzēšānaLayout);
+        Edienu_dzēšānaLayout.setHorizontalGroup(
+            Edienu_dzēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Edienu_dzēšānaLayout.createSequentialGroup()
+                .addGroup(Edienu_dzēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Edienu_dzēšānaLayout.createSequentialGroup()
+                        .addGap(232, 232, 232)
+                        .addComponent(edienaNosaukumsLab1))
+                    .addGroup(Edienu_dzēšānaLayout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addGroup(Edienu_dzēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(Edienu_dzēšānaLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(atpBut5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(atpBut6))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        Edienu_dzēšānaLayout.setVerticalGroup(
+            Edienu_dzēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Edienu_dzēšānaLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(edienaNosaukumsLab1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(Edienu_dzēšānaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(atpBut5)
+                    .addComponent(atpBut6))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        dzestEdienus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        dzestEdienus.setForeground(new java.awt.Color(255, 153, 153));
+        dzestEdienus.setText("Dzēst ēdienu");
+        dzestEdienus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dzestEdienusActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -1321,22 +1460,22 @@ public Registresana() {
                         Galvenais_logs.setResizable(false);
                         Galvenais_logs.setVisible(true);
 
-                        JOptionPane.showMessageDialog(
-                            Galvenais_logs,
-                            "Jūs veiksmīgi ielogojāties!",
-                            "Informācija",
-                            JOptionPane.INFORMATION_MESSAGE
-                        );
+               currentUserId = rs.getInt("user_id");
+    currentUserRole = rs.getString("role");
 
-                    } else {
-                        // Dati ir nepareizi — paliekam ekrānā.
-                        JOptionPane.showMessageDialog(
-                            Ielogošana,
-                            "Nepareizs e-pasts vai parole!",
-                            "Ielogošanas kļūda",
-                            JOptionPane.ERROR_MESSAGE
-                        );
-                    }
+    if ("administrators".equalsIgnoreCase(currentUserRole)) {
+        JOptionPane.showMessageDialog(
+            Ielogošana,
+            "Jūs ielogojāties kā administrators!"
+        );
+
+    } else {
+        JOptionPane.showMessageDialog(
+            Ielogošana,
+            "Jūs ielogojāties kā klients!"
+        );
+    }
+
                 }
 
             } catch (SQLException ex) {
@@ -1347,6 +1486,12 @@ public Registresana() {
                     JOptionPane.ERROR_MESSAGE
                 );
             }  
+            
+          
+
+}   catch (SQLException ex) {
+        Logger.getLogger(Registresana.class.getName()).log(Level.SEVERE, null, ex);
+    }
     }//GEN-LAST:event_ielogBut2ActionPerformed
 
     private void atceltButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atceltButActionPerformed
@@ -1456,85 +1601,78 @@ public Registresana() {
     private void saglabatButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saglabatButActionPerformed
         // TODO add your handling code here:
         
-        String name = edNosaukumsText.getText().trim();
-        String priceText = cenaText.getText().trim().replace(',', '.');
-        String description = aprakstArea.getText().trim();
+   String name = edNosaukumsText.getText().trim();
+String priceText = cenaText.getText().trim().replace(',', '.');
+String description = aprakstArea.getText().trim();
 
-        if (name.isEmpty() || priceText.isEmpty()) {
-            JOptionPane.showMessageDialog(
+if (name.isEmpty() || priceText.isEmpty()) {
+    JOptionPane.showMessageDialog(
+            Ēdienu_pievienošana,
+            "Ievadiet ēdiena nosaukumu un cenu!"
+    );
+    return;
+}
+
+try {
+
+    BigDecimal price = new BigDecimal(priceText);
+
+    if (price.compareTo(BigDecimal.ZERO) <= 0) {
+        JOptionPane.showMessageDialog(
                 Ēdienu_pievienošana,
-                "Ievadiet ēdiena nosaukumu un cenu!"
-            );
-            return;
-        }
+                "Cenai jābūt lielākai par nulli!"
+        );
+        return;
+    }
 
-        try {
-            BigDecimal price = new BigDecimal(priceText);
+    String sql =
+            "INSERT INTO DISHES (NAME, PRICE, DESCRIPTION, CATEGORY) VALUES (?, ?, ?, ?)";
 
-            if (price.compareTo(BigDecimal.ZERO) <= 0) {
-                JOptionPane.showMessageDialog(
-                    Ēdienu_pievienošana,
-                    "Cenai jābūt lielākai par nulli!"
-                );
-                return;
+    try (Connection conn = DatabaseManager.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, name);
+        ps.setBigDecimal(2, price);
+        ps.setString(3, description);
+        ps.setString(4, "Pamatēdieni");
+
+        ps.executeUpdate();
+    
             }
 
-            String sql =
-                "INSERT INTO DISHES (DISH_ID, NAME, PRICE, DESCRIPTION)"
-                + "VALUES (?, ?, ?, ?)";
-
-            try (Connection conn = DatabaseManager.getConnection()) {
-
-                // Ēdiena id
-                int dishId = 1;
-
-                String idSql = "SELECT MAX(DISH_ID) FROM DISHES";
-
-                try (PreparedStatement ps = conn.prepareStatement(idSql);
-                     ResultSet rs = ps.executeQuery()) {
-
-                    if (rs.next()) {
-                        dishId = rs.getInt(1) + 1;
-                    }
-                }
-
-                try (PreparedStatement ps = conn.prepareStatement(sql)) {
-                    ps.setInt(1, dishId);
-                    ps.setString(2, name);
-                    ps.setBigDecimal(3, price);
-                    ps.setString(4, description);
-                    ps.executeUpdate();
-                }
-            }
-
-            JOptionPane.showMessageDialog(
-                Ēdienu_pievienošana,
-                "Ēdiens veiksmīgi pievienots!",
-                "Informācija",
-                JOptionPane.INFORMATION_MESSAGE
-            );
+    JOptionPane.showMessageDialog(
+            Ēdienu_pievienošana,
+            "Ēdiens veiksmīgi pievienots!",
+            "Informācija",
+            JOptionPane.INFORMATION_MESSAGE
+    );
 
            
-            edNosaukumsText.setText("");
-            cenaText.setText("");
-            aprakstArea.setText("");
+    edNosaukumsText.setText("");
+    cenaText.setText("");
+    aprakstArea.setText("");
 
-            Ēdienu_pievienošana.setVisible(false);
-            Galvenais_logs.setVisible(true);
+    Ēdienu_pievienošana.setVisible(false);
+    Galvenais_logs.setVisible(true);
 
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(
-                Ēdienu_pievienošana,
-                "Ievadiet pareizu cenu, piemēram, 5.50!"
-            );
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(
-                Ēdienu_pievienošana,
-                "Datubāzes kļūda: " + ex.getMessage(),
-                "Kļūda",
-                JOptionPane.ERROR_MESSAGE
-            );
-        }
+} catch (NumberFormatException ex) {
+
+    JOptionPane.showMessageDialog(
+            Ēdienu_pievienošana,
+            "Ievadiet pareizu cenu, piemēram, 5.50!"
+    );
+
+} catch (SQLException ex) {
+
+    JOptionPane.showMessageDialog(
+            Ēdienu_pievienošana,
+            "Datubāzes kļūda: " + ex.getMessage(),
+            "Kļūda",
+            JOptionPane.ERROR_MESSAGE
+    );
+}
+        
+        
     }//GEN-LAST:event_saglabatButActionPerformed
 
     private void atpBut2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atpBut2ActionPerformed
@@ -1987,47 +2125,63 @@ public Registresana() {
 
     private void mekletButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mekletButActionPerformed
         // TODO add your handling code here:
+
     String nosaukums = ednosaukumsText.getText().trim();
 
     if (nosaukums.isEmpty()) {
         JOptionPane.showMessageDialog(
-            Ēdienu_meklēšana,
-            "Ievadiet ēdiena nosaukumu!"
+                Ēdienu_meklēšana,
+                "Ievadiet ēdiena nosaukumu!"
         );
         return;
     }
 
     try {
-        // Meklē ēdienus, izmantojot DishesDao
+
         DishesDao dishesDao = new DishesDao();
 
         DefaultTableModel model =
-            (DefaultTableModel) edienkarteTable.getModel();
+                (DefaultTableModel) edienkarteTable.getModel();
 
         model.setRowCount(0);
 
-        for (Object[] ediens : dishesDao.mekletEdienus(nosaukums)) {
+        List<Object[]> result = dishesDao.mekletEdienus(nosaukums);
+
+        System.out.println("Atrasto ēdienu skaits: "
+                + result.size());
+
+        for (Object[] ediens : result) {
             model.addRow(ediens);
         }
 
         if (model.getRowCount() == 0) {
+
             JOptionPane.showMessageDialog(
-                Ēdienu_meklēšana,
-                "Ēdieni netika atrasti!"
+                    Ēdienu_meklēšana,
+                    "Ēdieni netika atrasti!"
             );
+
             return;
         }
 
+        Ēdienkarte.pack();
         Ēdienkarte.setLocationRelativeTo(null);
         Ēdienkarte.setVisible(true);
+
         Ēdienu_meklēšana.setVisible(false);
 
-    } catch (SQLException ex) {
+    } catch (Exception ex) {
+
+        ex.printStackTrace();
+
         JOptionPane.showMessageDialog(
-            Ēdienu_meklēšana,
-            "Datubāzes kļūda: " + ex.getMessage()
+                null,
+                ex.toString(),
+                "Kļūda",
+                JOptionPane.ERROR_MESSAGE
         );
     }
+
     }//GEN-LAST:event_mekletButActionPerformed
 
     private void redigetButActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_redigetButActionPerformed
@@ -2103,6 +2257,121 @@ public Registresana() {
         // TODO add your handling code here:
     }//GEN-LAST:event_idedienamTextActionPerformed
 
+    private void dzestEdienusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dzestEdienusActionPerformed
+        // TODO add your handling code here:
+
+    DefaultTableModel model =
+            (DefaultTableModel) edienkarteTable1.getModel();
+
+    model.setRowCount(0);
+
+    try {
+        DishesDao dao = new DishesDao();
+
+        for (Object[] ediens : dao.ieladetEdienkarti()) {
+            model.addRow(ediens);
+        }
+
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage());
+    }
+
+    Edienu_dzēšāna.pack();
+    Edienu_dzēšāna.setLocationRelativeTo(null);
+    Edienu_dzēšāna.setResizable(false);
+    Edienu_dzēšāna.setVisible(true);
+
+    Galvenais_logs.setVisible(false);
+
+
+
+        
+    }//GEN-LAST:event_dzestEdienusActionPerformed
+
+    private void atpBut5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atpBut5ActionPerformed
+        // TODO add your handling code here:
+              Galvenais_logs.pack();
+           Galvenais_logs.setLocationRelativeTo(null);
+           Galvenais_logs.setResizable(false);
+           Galvenais_logs.setVisible(true);
+           Edienu_dzēšāna.setVisible(false);
+    }//GEN-LAST:event_atpBut5ActionPerformed
+
+    private void atpBut6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atpBut6ActionPerformed
+        // TODO add your handling code here:
+        
+            Edienu_dzēšāna.pack();
+           Edienu_dzēšāna.setLocationRelativeTo(null);
+           Edienu_dzēšāna.setResizable(false);
+           Edienu_dzēšāna.setVisible(true);
+           Galvenais_logs.setVisible(false);
+            
+
+
+    int row = edienkarteTable1.getSelectedRow();
+
+    if (row == -1) {
+        JOptionPane.showMessageDialog(this,
+                "Izvēlieties ēdienu!");
+        return;
+    }
+
+    Object value = edienkarteTable1.getValueAt(row, 0);
+
+    if (value == null) {
+        JOptionPane.showMessageDialog(this,
+                "Rinda ir tukša!");
+        return;
+    }
+
+    int id = Integer.parseInt(value.toString());
+
+    try {
+
+        DishesDao dao = new DishesDao();
+        dao.dzestEdienu(id);
+
+        JOptionPane.showMessageDialog(this,
+                "Ēdiens veiksmīgi dzēsts!");
+
+    } catch (SQLException ex) {
+
+        JOptionPane.showMessageDialog(this,
+                ex.getMessage());
+
+    }
+
+
+
+    }//GEN-LAST:event_atpBut6ActionPerformed
+
+    private void Edienu_dzēšānaWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_Edienu_dzēšānaWindowClosing
+ int confirm = JOptionPane.showConfirmDialog(
+            Registresana.this,
+            "Vai tiešām vēlaties aizvērt lietotni?",
+            "Apstiprinājums",
+            JOptionPane.YES_NO_OPTION
+        );
+        if (confirm == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_Edienu_dzēšānaWindowClosing
+
+    private void dzestEdienuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dzestEdienuActionPerformed
+        // TODO add your handling code here:
+              Edienu_dzēšāna.pack();
+           Edienu_dzēšāna.setLocationRelativeTo(null);
+           Edienu_dzēšāna.setResizable(false);
+           Edienu_dzēšāna.setVisible(true);
+           Galvenais_logs.setVisible(false);
+            
+    }//GEN-LAST:event_dzestEdienuActionPerformed
+
+    private void summaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_summaTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_summaTextActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2168,6 +2437,7 @@ public Registresana() {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDialog Edienu_dzēšāna;
     private javax.swing.JDialog Galvenais_logs;
     private javax.swing.JDialog Ielogošana;
     private javax.swing.JDialog Pasūtījuma_grozs;
@@ -2181,16 +2451,22 @@ public Registresana() {
     private javax.swing.JButton atpBut2;
     private javax.swing.JButton atpBut3;
     private javax.swing.JButton atpBut4;
+    private javax.swing.JButton atpBut5;
+    private javax.swing.JButton atpBut6;
     private javax.swing.JLabel cenaLab;
     private javax.swing.JTextField cenaText;
+    private javax.swing.JButton dzestEdienu;
+    private javax.swing.JButton dzestEdienus;
     private javax.swing.JLabel edNosaukumsLab;
     private javax.swing.JTextField edNosaukumsText;
     private javax.swing.JLabel edPievienosanaLab;
     private javax.swing.JLabel edRedigesanaLab;
     private javax.swing.JLabel edienaNosaukumsLab;
+    private javax.swing.JLabel edienaNosaukumsLab1;
     private javax.swing.JButton edienkarteBut;
     private javax.swing.JLabel edienkarteLab;
     private javax.swing.JTable edienkarteTable;
+    private javax.swing.JTable edienkarteTable1;
     private javax.swing.JButton edienumekBut;
     private javax.swing.JLabel ednosaukumsLab;
     private javax.swing.JTextField ednosaukumsText;
@@ -2217,6 +2493,7 @@ public Registresana() {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel jaunaCenaLab;
     private javax.swing.JTextField jaunaCenaText;
     private javax.swing.JLabel jaunaedNosaukumsLab;
@@ -2255,4 +2532,5 @@ public Registresana() {
     private javax.swing.JDialog Ēdienu_pievienošana;
     private javax.swing.JDialog Ēdienu_rediģēšana;
     // End of variables declaration//GEN-END:variables
+
 }

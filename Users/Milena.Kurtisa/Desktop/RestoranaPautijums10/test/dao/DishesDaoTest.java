@@ -47,7 +47,7 @@ public class DishesDaoTest {
     @Test
     public void testRedigetEdienu() throws Exception {
     DishesDao dao = new DishesDao();
-    List result = dao.mekletEdienus("Pizza");
+    List result = dao.mekletEdienus("Soļanka");
 
     assertNotNull(result);
 }

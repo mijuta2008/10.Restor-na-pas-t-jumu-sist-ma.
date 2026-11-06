@@ -104,4 +104,23 @@ public class DishesDao {
             }
         }
     }
+            public void dzestEdienu(int dishId) throws SQLException {
+
+    String sql = "DELETE FROM DISHES WHERE DISH_ID = ?";
+
+    try (Connection conn = DatabaseManager.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setInt(1, dishId);
+
+        int deleted = ps.executeUpdate();
+
+        if (deleted == 0) {
+            throw new SQLException(
+                "Ēdiens ar šo ID nav atrasts!"
+            );
+        }
+    }
 }
+        }
+    
